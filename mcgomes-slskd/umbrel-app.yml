@@ -2,7 +2,7 @@ manifestVersion: 1.1
 id: mcgomes-slskd
 category: media
 name: slskd
-version: "0.26.0-2"
+version: "0.26.0-3"
 tagline: Soulseek no navegador, com busca, fila e compartilhamento
 description: >-
   O slskd é um cliente Soulseek moderno: interface web, API e compartilhamento de
