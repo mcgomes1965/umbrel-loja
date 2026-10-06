@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mcgomes-soularr_server_1
+      APP_PORT: 8265
+      PROXY_AUTH_WHITELIST: "/api/*"
+
+  # O umbrelOS cria a pasta de dados como root:root e o Soularr roda como
+  # 1000:1000. Este servico roda uma vez, como root: ajusta o dono da pasta e
+  # semeia o config.ini a partir do exemplo oficial, apontando para o Lidarr e
+  # para o slskd desta loja (as chaves de API ficam de fora: quem coloca e o
+  # usuario, pelo editor de config da interface do Soularr).
+  init:
+    image: alpine:3.20
+    user: "0:0"
+    command: >-
+      sh -c "mkdir -p /data &&
+      chown -R 1000:1000 /data &&
+      if [ ! -f /data/config.ini ]; then
+      wget -qO /data/config.ini https://raw.githubusercontent.com/mrusse/soularr/main/config.ini &&
+      sed -i
+      -e 's|^host_url = http://lidarr:8686|host_url = http://lidarr_server_1:8686|'
+      -e 's|^host_url = http://slskd:5030|host_url = http://mcgomes-slskd_server_1:5030|'
+      -e 's|^download_dir = /data/slskd_downloads|download_dir = /downloads/soulseek|'
+      -e 's|^download_dir = /downloads$|download_dir = /downloads/soulseek|'
+      /data/config.ini &&
+      chown 1000:1000 /data/config.ini;
+      fi"
+    volumes:
+      - ${APP_DATA_DIR}/data/soularr:/data
+    restart: "no"
+
+  server:
+    image: mrusse08/soularr:v1.2.2
+    user: "1000:1000"
+    init: true
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Recife
+      # de quanto em quanto tempo ele procura albuns faltando (segundos)
+      - SCRIPT_INTERVAL=300
+      - WEBUI_ENABLED=true
+      - WEBUI_PORT=8265
+    volumes:
+      # config.ini e logs do proprio Soularr
+      - ${APP_DATA_DIR}/data/soularr:/data
+      # a MESMA pasta compartilhada que slskd/Lidarr/Jellyfin veem: e por aqui
+      # que ele encontra o que baixou e manda o Lidarr importar
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure

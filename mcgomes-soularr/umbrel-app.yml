@@ -1,0 +1,56 @@
+manifestVersion: 1.1
+id: mcgomes-soularr
+category: media
+name: Soularr
+version: "1.2.2"
+tagline: Liga o Lidarr ao Soulseek e baixa o que falta
+description: >-
+  O Soularr lê a lista de álbuns que falta no seu Lidarr, procura no Soulseek
+  (através do slskd), pega o que encontra e manda o Lidarr importar. Na prática:
+  aquele disco que tracker nenhum tem entra sozinho na sua biblioteca.
+
+
+  ⚠️ PRECISA DO slskd: este app é o cérebro; quem fala com o Soulseek é o app
+  slskd, desta mesma loja. Instale-o antes.
+
+
+  🛠️ PRIMEIRO ACESSO
+
+  1. Abra o Soularr (login do umbrelOS, como os outros) e clique em Config - a
+  interface tem um editor do config.ini no navegador;
+
+  2. Preencha as duas chaves de API: [Lidarr] api_key (no Lidarr: Settings →
+  General → API Key) e [Slskd] api_key (chave que você definiu no app slskd);
+
+  3. Os endereços e as pastas já vêm preenchidos pelo app, não mexa neles.
+
+
+  🔁 COMO FUNCIONA
+
+  A cada 5 minutos ele olha os álbuns faltando no Lidarr, busca no Soulseek,
+  baixa para a pasta compartilhada e pede a importação. O download mais rápido
+  vence: se o tracker achar antes, o Soularr desiste daquele álbum.
+
+
+  📁 TUDO CAI EM /downloads/soulseek, a mesma pasta que Lidarr, Bazarr e Jellyfin
+  enxergam.
+developer: mrusse
+website: https://github.com/mrusse/soularr
+submitter: Marcello
+submission: https://github.com/mrusse/soularr
+repo: https://github.com/mrusse/soularr
+support: https://github.com/mrusse/soularr/issues
+port: 8265
+icon: https://avatars.githubusercontent.com/u/88643649?s=200&v=4
+gallery:
+  - https://avatars.githubusercontent.com/u/88643649?s=200&v=4
+releaseNotes: >-
+  Primeira versão: Soularr 1.2.2 empacotado para o umbrelOS, com acesso à pasta
+  de downloads compartilhada, interface web e config.ini já apontando para o
+  Lidarr e para o slskd desta loja.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions:
+  - STORAGE_DOWNLOADS
