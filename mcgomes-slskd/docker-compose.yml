@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: mcgomes-slskd_server_1
+      APP_PORT: 5030
+      PROXY_AUTH_WHITELIST: "/api/*"
+
+  server:
+    image: slskd/slskd:0.26.0
+    user: "1000:1000"
+    init: true
+    environment:
+      # permite configurar o Soulseek pela interface web (Options)
+      - SLSKD_REMOTE_CONFIGURATION=true
+      - SLSKD_APP_DIR=/app
+      # onde os arquivos baixados caem (mesma pasta que Lidarr/Jellyfin veem)
+      - SLSKD_DOWNLOADS_DIR=/downloads/soulseek
+      # particoes incompletas ficam separadas, para nao sujar a biblioteca
+      - SLSKD_INCOMPLETE_DIR=/downloads/soulseek/incomplete
+      # o Soulseek exige compartilhar para poder baixar
+      - SLSKD_SHARED_DIR=/downloads/soulseek
+      - SLSKD_UMASK=002
+    ports:
+      # porta de conexoes de entrada do Soulseek (pares)
+      - "50300:50300/tcp"
+    volumes:
+      - ${APP_DATA_DIR}/data/slskd:/app
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    restart: on-failure

@@ -1,0 +1,54 @@
+manifestVersion: 1.1
+id: mcgomes-slskd
+category: media
+name: slskd
+version: "0.26.0"
+tagline: Soulseek no navegador, com busca, fila e compartilhamento
+description: >-
+  O slskd é um cliente Soulseek moderno: interface web, API e compartilhamento de
+  arquivos. É a fonte que resolve música que tracker nenhum tem — cauda longa,
+  discos brasileiros, bootlegs, coisas fora de catálogo.
+
+
+  🛠️ PRIMEIRO ACESSO
+
+  1. Abra o app (ele pede o login do umbrelOS, como os outros) e entre com
+  slskd / slskd;
+
+  2. Em Options → Soulseek, coloque seu usuário e senha do Soulseek. Se você não
+  tem conta, basta escolher um nome e senha: o Soulseek cria na primeira conexão;
+
+  3. Aponte a pasta de download para /downloads/soulseek (já vem configurada) e
+  deixe ao menos uma pasta compartilhada — o Soulseek exige compartilhar para
+  poder baixar.
+
+
+  📁 O QUE BAIXA AQUI
+
+  Os arquivos caem em /downloads/soulseek, que é a mesma pasta que o Jellyfin e o
+  Lidarr enxergam. Para o álbum entrar na biblioteca de música, use no Lidarr o
+  Manual Import apontando para essa pasta (ou peça para a IA configurar o envio
+  automático via Soularr).
+
+
+  ⚠️ A porta 50300 precisa estar acessível na sua rede para boas conexões de
+  pares — ela é publicada pelo app.
+developer: slskd
+website: https://slskd.org
+submitter: Marcello
+submission: https://github.com/slskd/slskd
+repo: https://github.com/slskd/slskd
+support: https://github.com/slskd/slskd/issues
+port: 5030
+icon: https://avatars.githubusercontent.com/u/88643649?s=200&v=4
+gallery:
+  - https://avatars.githubusercontent.com/u/88643649?s=200&v=4
+releaseNotes: >-
+  Primeira versão da loja: slskd 0.26.0 empacotado para o umbrelOS, com acesso à
+  pasta de downloads compartilhada e configuração pela web.
+dependencies: []
+path: ""
+defaultUsername: "slskd"
+defaultPassword: "slskd"
+permissions:
+  - STORAGE_DOWNLOADS
