@@ -7,10 +7,25 @@ services:
       APP_PORT: 5030
       PROXY_AUTH_WHITELIST: "/api/*"
 
+  # O umbrelOS cria a pasta de dados como root:root, mas o slskd roda como
+  # 1000:1000. Este servico roda uma vez, como root, ajustando o dono da pasta
+  # antes do slskd subir (senao o app fica em loop com
+  # "/app is not readable and/or writable by the current user").
+  init:
+    image: alpine:3.20
+    user: "0:0"
+    command: sh -c "mkdir -p /app && chown -R 1000:1000 /app"
+    volumes:
+      - ${APP_DATA_DIR}/data/slskd:/app
+    restart: "no"
+
   server:
     image: slskd/slskd:0.26.0
     user: "1000:1000"
     init: true
+    depends_on:
+      init:
+        condition: service_completed_successfully
     environment:
       # permite configurar o Soulseek pela interface web (Options)
       - SLSKD_REMOTE_CONFIGURATION=true
