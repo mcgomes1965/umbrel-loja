@@ -14,6 +14,8 @@ deste repositório. Depois é só instalar os apps normalmente.
 | App | ID | O que é |
 |---|---|---|
 | **slskd** | `mcgomes-slskd` | Cliente Soulseek com interface web, para baixar música que tracker nenhum tem |
+| **Soularr** | `mcgomes-soularr` | Ponte entre o Lidarr e o Soulseek: pega o que falta no Lidarr e busca no slskd |
+| **code-server** | `mcgomes-code-server` | VS Code no navegador, rodando no Umbrel |
 
 ### slskd
 
@@ -30,10 +32,14 @@ deste repositório. Depois é só instalar os apps normalmente.
 
 ```
 umbrel-app-store.yml          metadados da loja (id + nome)
-mcgomes-slskd/
+mcgomes-<app>/
   umbrel-app.yml              manifesto do app (como o umbrelOS o exibe)
-  docker-compose.yml          serviços (app_proxy + slskd)
+  docker-compose.yml          serviços (app_proxy + o app)
 ```
+
+> Regra do chassi: o `APP_HOST` do `app_proxy` é `<id-do-app>_<serviço>_1`. Com id
+> `mcgomes-code-server`, o container é `mcgomes-code-server_server_1` — copiar o
+> manifesto oficial sem ajustar isso faz o app instalar e responder 502.
 
 ## Nota
 

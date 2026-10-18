@@ -26,9 +26,9 @@ repo: https://github.com/cdr/code-server
 support: https://github.com/cdr/code-server/discussions
 port: 8091
 gallery:
-  - 1.jpg
-  - 2.jpg
-  - 3.jpg
+  - https://raw.githubusercontent.com/coder/code-server/main/src/browser/media/pwa-icon-512.png
+  - https://raw.githubusercontent.com/coder/code-server/main/docs/assets/screenshot-1.png
+  - https://raw.githubusercontent.com/coder/code-server/main/docs/assets/screenshot-2.png
 path: ""
 defaultUsername: ""
 deterministicPassword: true
