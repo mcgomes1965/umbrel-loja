@@ -3,7 +3,7 @@ id: mcgomes-code-server
 storage:
   dataRoot: data
 category: developer
-name: code-server
+name: code-server (Marcello)
 version: "4.141.0"
 tagline: Run VS Code on your Umbrel
 description: >-
@@ -15,16 +15,15 @@ description: >-
 
   By running all intensive tasks run on your Umbrel, preserve battery life of your devices when you're on the go.
 releaseNotes: >-
-  This release updates the underlying VS Code editor to 1.141.0.
-
-
-  Full release notes are available at https://github.com/coder/code-server/releases/tag/v4.141.0
+  Cópia fixada da versão 4.141.0 publicada pela Umbrel, com porta própria (8097)
+  para conviver com o app oficial do catálogo, que ocupa a 8091.
 developer: Coder
 website: https://coder.com
 dependencies: []
 repo: https://github.com/cdr/code-server
 support: https://github.com/cdr/code-server/discussions
-port: 8091
+port: 8097
+icon: https://raw.githubusercontent.com/coder/code-server/main/src/browser/media/pwa-icon-512.png
 gallery:
   - https://raw.githubusercontent.com/coder/code-server/main/src/browser/media/pwa-icon-512.png
   - https://raw.githubusercontent.com/coder/code-server/main/docs/assets/screenshot-1.png
