@@ -16,6 +16,7 @@ deste repositório. Depois é só instalar os apps normalmente.
 | **slskd** | `mcgomes-slskd` | Cliente Soulseek com interface web, para baixar música que tracker nenhum tem |
 | **Soularr** | `mcgomes-soularr` | Ponte entre o Lidarr e o Soulseek: pega o que falta no Lidarr e busca no slskd |
 | **code-server** | `mcgomes-code-server` | VS Code no navegador, versão fixada em 4.141.0 — serve na **8097**, para conviver com o app oficial (8091) |
+| **Miniflux** | `mcgomes-miniflux` | Leitor de RSS/Atom com Postgres próprio — serve na **8082** |
 
 ### slskd
 

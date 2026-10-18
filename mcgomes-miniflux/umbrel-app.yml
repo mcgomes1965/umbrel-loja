@@ -1,0 +1,45 @@
+manifestVersion: 1.1
+id: mcgomes-miniflux
+category: social
+name: Miniflux
+version: "2.3.3"
+tagline: Leitor de RSS e Atom, leve e sem distração
+description: >-
+  Miniflux é um leitor de feeds minimalista: sem JavaScript no servidor, sem
+  tema para escolher e sem plugin nenhum. Ele só faz uma coisa — juntar seus
+  feeds e mostrar o que você ainda não leu — e faz isso rápido mesmo com
+  centenas de assinaturas.
+
+
+  Serve bem para acompanhar o que não deveria depender de rede social: Banco
+  Central, IBGE, Valor, blogs de macro e releases de projeto.
+
+
+  🔑 PRIMEIRO ACESSO
+
+  O usuário administrador é criado no primeiro start. O login é mcgomes e a
+  senha é a que o umbrelOS gerou para este app — ela aparece no cartão do app,
+  em "credenciais". Se esquecer, dá para redefinir por env no painel do app.
+
+
+  🗄️ BANCO
+
+  O Postgres roda dentro do app, com os dados em ${APP_DATA_DIR}. Não é
+  publicado na rede: só o Miniflux fala com ele. Remover o app pela interface
+  do umbrelOS leva o banco junto.
+developer: Frédéric Guillot
+website: https://miniflux.app
+repo: https://github.com/miniflux/v2
+support: https://github.com/miniflux/v2/issues
+port: 8082
+icon: https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/miniflux.png
+gallery:
+  - https://raw.githubusercontent.com/miniflux/v2/main/internal/ui/static/bin/icon-512.png
+  - https://raw.githubusercontent.com/homarr-labs/dashboard-icons/main/png/miniflux.png
+dependencies: []
+path: ""
+defaultUsername: "mcgomes"
+deterministicPassword: true
+releaseNotes: >-
+  Primeira versão: Miniflux 2.3.3 sobre Postgres 17, com o admin criado no
+  primeiro start e a senha gerada pelo umbrelOS.

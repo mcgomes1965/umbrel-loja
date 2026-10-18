@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # <id-do-app>_<servico>_1 - o id entra no nome do container.
+      APP_HOST: mcgomes-miniflux_server_1
+      APP_PORT: 8080
+
+  # Postgres interno. A porta NAO e publicada no host, entao esta credencial
+  # so tem valor dentro da rede do app - mesmo padrao do Linkwarden oficial.
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=miniflux
+      - POSTGRES_PASSWORD=miniflux_local_db
+      - POSTGRES_DB=miniflux
+    restart: on-failure
+    volumes:
+      - ${APP_DATA_DIR}/data/db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U miniflux -d miniflux"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    image: miniflux/miniflux:2.3.3
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgres://miniflux:miniflux_local_db@mcgomes-miniflux_postgres_1:5432/miniflux?sslmode=disable
+      - RUN_MIGRATIONS=1
+      - CREATE_ADMIN=1
+      - ADMIN_USERNAME=mcgomes
+      - ADMIN_PASSWORD=$APP_PASSWORD
+      - BASE_URL=http://${DEVICE_DOMAIN_NAME}:8082
