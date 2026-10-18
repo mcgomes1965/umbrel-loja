@@ -6,10 +6,24 @@ services:
       APP_HOST: mcgomes-code-server_server_1
       APP_PORT: 8080
 
+  # O umbrelOS cria ${APP_DATA_DIR} como root:root; o server roda como 1000:1000
+  # e sem este chown entra em loop com "EACCES: permission denied, mkdir
+  # '/home/coder/.config'" - a porta nunca abre.
+  init:
+    image: alpine:3.20
+    user: "0:0"
+    command: sh -c "mkdir -p /home/coder && chown -R 1000:1000 /home/coder"
+    volumes:
+      - ${APP_DATA_DIR}/data:/home/coder
+    restart: "no"
+
   server:
     image: codercom/code-server:4.141.0@sha256:72ab24b5680ee597dd647b30d82625752f40109b5f61bef90ffbf1ea1f02dbb8
     restart: on-failure
     user: "1000:1000"
+    depends_on:
+      init:
+        condition: service_completed_successfully
     volumes:
       - ${APP_DATA_DIR}/data:/home/coder
     environment:

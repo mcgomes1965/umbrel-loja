@@ -4,7 +4,7 @@ storage:
   dataRoot: data
 category: developer
 name: code-server (Marcello)
-version: "4.141.0"
+version: "4.141.0-1"
 tagline: Run VS Code on your Umbrel
 description: >-
   Run VS Code on your Umbrel and access it in the browser so you can
