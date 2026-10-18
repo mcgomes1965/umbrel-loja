@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: code-server
+id: mcgomes-code-server
 storage:
   dataRoot: data
 category: developer
